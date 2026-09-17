@@ -1,0 +1,21 @@
+{
+  "name": "yt-adblocker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-rules.mjs && node scripts/build.mjs",
+    "test": "vitest run --environment jsdom",
+    "test:watch": "vitest --environment jsdom",
+    "typecheck": "tsc --noEmit",
+    "pretest": "node scripts/build-rules.mjs",
+    "pretypecheck": "node scripts/build-rules.mjs"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.1.6",
+    "esbuild": "^0.25.0",
+    "jsdom": "^30.0.1",
+    "typescript": "^5.8.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "manifest_version": 3,
+  "name": "YT-AdBlocker",
+  "version": "0.1.0",
+  "description": "A dedicated YouTube ad blocking and playback protection extension.",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "*://www.youtube.com/*",
+    "*://youtube.com/*",
+    "*://*.youtube.com/*",
+    "*://doubleclick.net/*",
+    "*://*.doubleclick.net/*",
+    "*://googleadservices.com/*",
+    "*://*.googleadservices.com/*",
+    "*://googlesyndication.com/*",
+    "*://*.googlesyndication.com/*",
+    "*://google-analytics.com/*",
+    "*://*.google-analytics.com/*",
+    "*://adservice.google.com/*",
+    "*://*.adservice.google.com/*",
+    "*://pagead.googlesyndication.com/*",
+    "*://pagead2.googlesyndication.com/*",
+    "*://ad.doubleclick.net/*",
+    "*://securepubads.g.doubleclick.net/*",
+    "*://pubads.g.doubleclick.net/*",
+    "*://imasdk.googleapis.com/*",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "action": {
+    "default_title": "YT-AdBlocker",
+    "default_popup": "popup/index.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "page-interceptor.js"
+      ],
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://youtube.com/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "yt-adblocker@local",
+      "strict_min_version": "128.0"
+    }
+  },
+  "icons": {
+    "128": "assets/icons/icon.png"
+  }
+}

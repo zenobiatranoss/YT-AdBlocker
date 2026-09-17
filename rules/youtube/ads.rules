@@ -1,0 +1,19 @@
+! YouTube ad and ad-service network rules
+||doubleclick.net^
+||googleadservices.com^
+||googlesyndication.com^
+||google-analytics.com^
+||adservice.google.com^
+||pagead.googlesyndication.com^
+||pagead2.googlesyndication.com^
+||ad.doubleclick.net^
+||securepubads.g.doubleclick.net^
+||pubads.g.doubleclick.net^
+||imasdk.googleapis.com^
+||youtube.com/get_midroll_info
+||youtube.com/api/stats/ads
+||youtube.com/pagead/
+||youtube.com/ad_data
+
+! YouTube third-party ad media
+*_ad_$media,domain=youtube.com,3p
