@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>YT-AdBlocker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <div class="brand">
+        <img src="../assets/icons/icon.png" alt="">
+        <h1>YT-AdBlocker</h1>
+      </div>
+      <span id="status">Loading</span>
+    </header>
+
+    <section class="control">
+      <span>Protection</span>
+      <button id="toggle" type="button">...</button>
+    </section>
+
+    <section class="stats">
+      <div>
+        <strong id="detections">0</strong>
+        <span>Detected</span>
+      </div>
+      <div>
+        <strong id="blocked">0</strong>
+        <span>Blocked</span>
+      </div>
+      <div>
+        <strong id="displayed">0</strong>
+        <span>Displayed</span>
+      </div>
+    </section>
+
+    <button id="statistics-toggle" class="statistics-toggle" type="button">Statistics <span>▾</span></button>
+
+    <div id="statistics-panel" class="statistics-panel">
+      <section class="details">
+        <div>
+          <span>Player responses</span>
+        <strong id="player-responses">0</strong>
+      </div>
+      <div>
+        <span>Ad placements removed</span>
+        <strong id="placements">0</strong>
+      </div>
+      <div>
+        <span>Interruptions prevented</span>
+        <strong id="prevented">0</strong>
+      </div>
+        <div>
+          <span>Playback recoveries</span>
+          <strong id="recoveries">0</strong>
+        </div>
+      </section>
+
+      <section class="details engine-details">
+      <div class="section-title">Go Engine</div>
+      <div>
+        <span>Requests processed</span>
+        <strong id="engine-requests">0</strong>
+      </div>
+      <div>
+        <span>Requests blocked</span>
+        <strong id="engine-blocked">0</strong>
+      </div>
+      <div>
+        <span>Requests allowed</span>
+        <strong id="engine-allowed">0</strong>
+      </div>
+      <div>
+        <span>Rule hits</span>
+        <strong id="engine-rule-hits">0</strong>
+      </div>
+      <div>
+        <span>Detections</span>
+        <strong id="engine-detections">0</strong>
+      </div>
+      <div>
+        <span>Interruptions prevented</span>
+        <strong id="engine-interruptions">0</strong>
+      </div>
+      <div>
+        <span>Playback recoveries</span>
+        <strong id="engine-recoveries">0</strong>
+      </div>
+      </section>
+
+      <section class="last-event">
+      <div class="section-title">Last event</div>
+      <strong id="last-event">No events yet</strong>
+      <span id="last-event-time"></span>
+    </section>
+
+      <section class="events">
+        <div class="section-title">Recent events</div>
+        <div id="event-list"></div>
+      </section>
+    </div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
+

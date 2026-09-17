@@ -1,0 +1,11 @@
+! YouTube page-level ad elements
+youtube.com##.ytp-ad-player-overlay
+youtube.com##.ytp-ad-overlay-container
+youtube.com##.ytp-ad-text
+youtube.com##.ytp-ad-preview-container
+youtube.com##.ytp-ad-image-overlay
+youtube.com##ytd-ad-slot-renderer
+youtube.com##ytd-display-ad-renderer
+youtube.com##ytd-promoted-sparkles-web-renderer
+youtube.com##ytd-in-feed-ad-layout-renderer
+youtube.com##ytd-banner-promo-renderer
