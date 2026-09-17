@@ -1,4 +1,4 @@
-# yt-adblocker
+# <img src="extension/assets/icons/icon.png" width="32" height="32"> <span style="position: relative; top: -3px;">YT-AdBlocker</span>
 
 a firefox extension made to block ads on youtube and protect video playback.
 
