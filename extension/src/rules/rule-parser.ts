@@ -166,6 +166,7 @@ export function parseRule(raw: string): ParsedRule | null {
     if (!selector) {
       return null
     }
+    
 
     return {
       raw: line,
