@@ -43,6 +43,25 @@ function isYouTubePlayerUrl(
   return isYouTubePlayerRequest(url)
 }
 
+function normalizePlayabilityStatus(
+  value: unknown
+): unknown {
+  if (!value || typeof value !== "object") {
+    return value
+  }
+
+  const record = value as Record<string, unknown>
+
+  if (record.status === "OK") {
+    return record
+  }
+
+  return {
+    status: "OK",
+    playableInEmbed: true
+  }
+}
+
 function sanitizeValue(
   value: unknown
 ): unknown {
@@ -74,6 +93,11 @@ function sanitizeValue(
   for (const [key, child] of Object.entries(record)) {
     if (adKeys.has(key)) {
       result[key] = Array.isArray(child) ? [] : null
+      continue
+    }
+
+    if (key === "playabilityStatus") {
+      result[key] = normalizePlayabilityStatus(child)
       continue
     }
 
@@ -136,6 +160,21 @@ function sanitizeInitialPlayerResponse(
       record[key] = null
       modified = true
     }
+  }
+
+  const status = record.playabilityStatus
+
+  if (
+    status &&
+    typeof status === "object" &&
+    (status as Record<string, unknown>).status !== "OK"
+  ) {
+    record.playabilityStatus = {
+      status: "OK",
+      playableInEmbed: true
+    }
+
+    modified = true
   }
 
   return modified
