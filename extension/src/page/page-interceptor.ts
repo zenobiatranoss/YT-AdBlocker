@@ -92,7 +92,6 @@ function sanitizeValue(
 
   for (const [key, child] of Object.entries(record)) {
     if (adKeys.has(key)) {
-      result[key] = Array.isArray(child) ? [] : null
       continue
     }
 
@@ -145,21 +144,8 @@ function sanitizeInitialPlayerResponse(
       continue
     }
 
-    const value = record[key]
-
-    if (Array.isArray(value)) {
-      if (value.length > 0) {
-        record[key] = []
-        modified = true
-      }
-
-      continue
-    }
-
-    if (value !== null) {
-      record[key] = null
-      modified = true
-    }
+    delete record[key]
+    modified = true
   }
 
   const status = record.playabilityStatus
@@ -765,7 +751,58 @@ function installPlaybackRecovery(): void {
   )
 }
 
+type YtConfigWindow = Window & {
+  yt?: {
+    config_?: {
+      EXPERIMENT_FLAGS?: Record<string, unknown>
+    }
+  }
+}
+
+function installExperimentFlagOverride(): void {
+  const flagNames = [
+    "ab_det_apb_b",
+    "ab_det_apm",
+    "ab_det_el_h",
+    "ab_det_gen_re",
+    "web_ad_block_detection",
+    "player_bytes_ad_break_ab_detect"
+  ]
+
+  function applyOverride(): boolean {
+    const ytWindow = window as YtConfigWindow
+    const flags = ytWindow.yt?.config_?.EXPERIMENT_FLAGS
+
+    if (!flags) {
+      return false
+    }
+
+    for (const name of flagNames) {
+      if (name in flags) {
+        flags[name] = false
+      }
+    }
+
+    return true
+  }
+
+  if (applyOverride()) {
+    return
+  }
+
+  let attempts = 0
+
+  const interval = window.setInterval(() => {
+    attempts++
+
+    if (applyOverride() || attempts > 100) {
+      window.clearInterval(interval)
+    }
+  }, 50)
+}
+
 installFetchInterceptor()
 installXHRInterceptor()
 installInitialPlayerResponseProtection()
 installPlaybackRecovery()
+installExperimentFlagOverride()
