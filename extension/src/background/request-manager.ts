@@ -328,9 +328,43 @@ function localDecision(
   return result
 }
 
+const baitScriptRedirects: Array<{
+  match: (url: string) => boolean
+  redirectUrl: string
+}> = [
+  {
+    match: url =>
+      url.includes("static.doubleclick.net/instream/ad_status.js"),
+    redirectUrl: "data:application/javascript,"
+  },
+  {
+    match: url =>
+      url.includes("googleads.g.doubleclick.net/pagead/id"),
+    redirectUrl: "data:application/javascript,"
+  }
+]
+
+function getBaitScriptRedirect(url: string): string | null {
+  for (const entry of baitScriptRedirects) {
+    if (entry.match(url)) {
+      return entry.redirectUrl
+    }
+  }
+
+  return null
+}
+
 function handleRequest(
   details: chrome.webRequest.OnBeforeRequestDetails
 ): chrome.webRequest.BlockingResponse {
+  const baitRedirect = getBaitScriptRedirect(details.url)
+
+  if (baitRedirect) {
+    return {
+      redirectUrl: baitRedirect
+    }
+  }
+
   if (!filter || !shouldCheckRules(details)) {
     return {}
   }
