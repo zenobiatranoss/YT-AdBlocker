@@ -124,9 +124,9 @@ type PlaybackOverride = {
 let override: PlaybackOverride | null = null
 
 const MAX_OVERRIDE_MS = 20000
-const TARGET_RATE = 16
+const TARGET_RATE = 10
 const RECOVERY_RATE = 2
-const COOLDOWN_MS = 1200
+const COOLDOWN_MS = 3000
 
 function getVideo(): HTMLVideoElement | null {
   return document.querySelector("video")
