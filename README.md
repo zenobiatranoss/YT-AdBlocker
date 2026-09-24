@@ -4,7 +4,8 @@ a firefox extension made to block ads on youtube and protect video playback.
 
 it uses typescript for the browser extension and go for the native engine.
 
-## you can try https://addons.mozilla.org/en-US/firefox/addon/yt-adblocker
+## you can try 
+https://addons.mozilla.org/en-US/firefox/addon/yt-adblocker
 ## features
 
 - blocks youtube ad requests
